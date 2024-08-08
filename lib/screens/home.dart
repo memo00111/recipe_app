@@ -3,6 +3,7 @@ import 'package:recipe_app/components/bottom_nav_bar.dart';
 import 'package:recipe_app/screens/home_screen.dart';
 import 'package:recipe_app/screens/recipe_category.dart';
 import 'package:recipe_app/screens/search_screen.dart';
+import 'package:recipe_app/screens/shopping_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -54,7 +55,7 @@ class _HomeState extends State<Home> {
           RecipeCategory(),
           SearchScreen(),
           Center(child: Text('page 4'),),
-          Center(child: Text('page 5'),),
+          ShoppingScreen(),
           
 
         ],

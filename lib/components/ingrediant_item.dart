@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class IngredientItem extends StatelessWidget {
   final String quantity,measure,food,imageUrl ;
@@ -15,6 +16,7 @@ class IngredientItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final h=MediaQuery.of(context).size.height;
     final w=MediaQuery.of(context).size.width;
+    var mybox=Hive.box('shopping');
     return Container(
       margin: EdgeInsets.symmetric(vertical: h*.008,horizontal: w*.033),
       padding: EdgeInsets.only(
@@ -42,7 +44,41 @@ class IngredientItem extends StatelessWidget {
             fontSize: w*.04,fontWeight: FontWeight.bold,letterSpacing: 1
           ),),
           SizedBox(width: w*.033,),
-          Icon(Icons.add_circle_outline_rounded,size: w*.07,color: Colors.red,)
+          ValueListenableBuilder(
+            valueListenable: mybox.listenable(),
+            builder: (context,box,_){
+              bool exist=box.containsKey(food);
+              if (exist){
+                return GestureDetector(
+                  onTap: (){
+                    mybox.delete(food);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('item deleted'))
+                    );
+
+                  },
+                  child: Icon(Icons.done,color: Colors.green,size: w*.07,));
+              }
+                
+          
+
+            else  { return GestureDetector(
+              onTap: (){
+                String value='$food $measure $quantity ';
+                mybox.put(food, value);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('item added succefully'))
+                  
+                );
+              },
+              child: Icon(
+                 
+                  Icons.add_circle_outline_rounded,size: w*.07,color: Colors.red,),
+            );}
+              
+            },
+            
+            )
         ],
       ),
 
