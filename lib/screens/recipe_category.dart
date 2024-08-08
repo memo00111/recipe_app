@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/components/recipe_category_view.dart';
 import 'package:recipe_app/constants/category_list.dart';
+import 'package:recipe_app/screens/all_recipe.dart';
 
 class RecipeCategory extends StatelessWidget {
   const RecipeCategory({super.key});
@@ -42,30 +43,36 @@ class RecipeCategory extends StatelessWidget {
             itemCount: categoryimage.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,crossAxisSpacing: h*.01,mainAxisSpacing: w*.021),
             itemBuilder: (context, index) {
-              return Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                
-            
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: h*.043,width: w*.08,
-                      child: Image.asset(categoryimage[index]),
-                    ),
-                    SizedBox(height: h*.003,),
-                    Text(categoris[index],style: const TextStyle(
-                      fontWeight: FontWeight.bold,color: Colors.black45
-                    ),)
-                  ],
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                   MaterialPageRoute(builder: (context)=>AllRecipe(recipe: categoris[index])));
+                },
+                child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  
+                            
                 ),
-              ),
-            );
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: h*.043,width: w*.08,
+                        child: Image.asset(categoryimage[index]),
+                      ),
+                      SizedBox(height: h*.003,),
+                      Text(categoris[index],style: const TextStyle(
+                        fontWeight: FontWeight.bold,color: Colors.black45
+                      ),)
+                    ],
+                  ),
+                ),
+                            ),
+              );
               
             },
             
