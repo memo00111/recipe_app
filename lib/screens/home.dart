@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/components/bottom_nav_bar.dart';
 import 'package:recipe_app/screens/home_screen.dart';
 import 'package:recipe_app/screens/recipe_category.dart';
+import 'package:recipe_app/screens/search_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -51,7 +52,7 @@ class _HomeState extends State<Home> {
         children:const [
           HomePage(),
           RecipeCategory(),
-          Center(child: Text('page 3'),),
+          SearchScreen(),
           Center(child: Text('page 4'),),
           Center(child: Text('page 5'),),
           

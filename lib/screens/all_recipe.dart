@@ -16,12 +16,13 @@ class AllRecipe extends StatelessWidget {
       ),
       body: FutureBuilder(future: ConstantFunction.getResponse(recipe),
        builder:(context,snapshot){
-        if(!snapshot.hasData){
-          return const Center(child: Text('no data'),);
-        }else if(snapshot.connectionState==ConnectionState.waiting){
+         if(snapshot.connectionState==ConnectionState.waiting){
           return const Center(
             child: CircularProgressIndicator(),
           );
+        }
+        else if(!snapshot.hasData){
+          return const Center(child: Text('no data'),);
         }
         return Padding(padding: EdgeInsets.only(
           right: w*.034,left: h*.03,
@@ -32,7 +33,7 @@ class AllRecipe extends StatelessWidget {
           ),
            itemBuilder:(context,index){
             Map<String,dynamic>snap=snapshot.data![index];
-            int time=snap['totaltime'].toInt();
+            // String time=snap['totaltime'].toInt();
             return Container(
               color: Colors.white,
               child: Column(
@@ -53,16 +54,16 @@ class AllRecipe extends StatelessWidget {
                          
                         ),
                       ),
-                      Positioned(child: Container(
-                        height: 20,width: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text("${time.toString()} min",style: TextStyle(color: Colors.white),),
-                        ),
-                      ))
+                      // Positioned(child: Container(
+                      //   height: 20,width: 50,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.red,
+                      //     borderRadius: BorderRadius.circular(10),
+                      //   ),
+                      //   child: Center(
+                      //     // child: Text("${time.toString()} min",style: TextStyle(color: Colors.white),),
+                      //   ),
+                      // ))
                     ],
 
                   ),),
